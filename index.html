@@ -7,30 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-    <audio id="audioPlayer" ontimeupdate="update(this)">
-      <source src="hype_home.ogg">
-      <source src="test.mp3">
-    </audio>
-
-    <div>
-      <div id="progressBarControl">
-        <div id="progressBar">Pas de lecture</div>
-      </div>
-    </div>
-
-    <button class="control" onclick="play('audioPlayer', this)">Play</button>
-    <button class="control" onclick="resume('audioPlayer')">Stop</button>
-
-    <span class="volume">
-      <a class="stick1" onclick="volume('audioPlayer', 0)"></a>
-      <a class="stick2" onclick="volume('audioPlayer', 0.3)"></a>
-      <a class="stick3" onclick="volume('audioPlayer', 0.5)"></a>
-      <a class="stick4" onclick="volume('audioPlayer', 0.7)"></a>
-      <a class="stick5" onclick="volume('audioPlayer', 1)"></a>
-    </span>
-
-    <div id="progressBar" onclick="clickProgress('audioPlayer', this, event)">Pas de lecture</div>
-    <span id="progressTime">00:00</span>
-
+    <audio controls preload="metadata" style=" width:300px;">
+	<source src="test.mp3" type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio><br />
+<a href="http://scriptgenerator.net/really-simple-embed-audio-player-script/" title="Generate here your HTML5 audio player" style="text-align: right;display: block">HTML5 Audio Player</a>
 	</body>
 </html>
