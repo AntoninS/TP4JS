@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
 
     var buttonLoadRSS = document.createElement("button");
     buttonLoadRSS.innerHTML = "Load RSS feed";
-    buttonLoadRSS.addEventListener("click", request(readData));
+    buttonLoadRSS.addEventListener("click", request)
 
 
     var inputRSS = document.createElement("input");
@@ -18,48 +18,25 @@ window.addEventListener("load", function() {
     elementPlayer.appendChild(inputRSS);
     elementPlayer.appendChild(sound);
 
-    function getXDomainRequest() {
-            var xdr = null;
-            if (window.XDomainRequest) {
-                    xdr = new XDomainRequest();
-            } else if (window.XMLHttpRequest) {
-                    xdr = new XMLHttpRequest();
-            } else {
-                    alert("Votre navigateur ne gère pas l'AJAX cross-domain !");
-            }
-            return xdr;
-    }
+    function request() {
+        var xhr = new XMLHttpRequest();
+        var url = "https://crossorigin.me/http://radiofrance-podcast.net/podcast09/rss_15644.xml"; //+ document.getElementById("inputRSS");
+        console.log(url);
 
-    function sendData() {
-            var xdr = getXDomainRequest();
-            xdr.onload = function() {
-                    alert(xdr.responseText);
-            }
-            xdr.open("GET", "http://radiofrance-podcast.net/podcast09/rss_15644.xml");
-            xdr.send();
-            console.log(xdr.responseXML);
+        xhr.open("GET", url, true);
+        //xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
 
-    function chargeAudio() {
-        sound.src = "test.mp3";
 
-    }
-
-    function request(callback) {
-        var xhr = getXMLHttpRequest();
-        var url = document.getElementById("inputRSS");
-        xhr.onreadystatechange = function() {
+        xhr.addEventListener('readystatechange', function() {
             if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status === 0)) {
-                callback(xhr.responseXML);
+                alert(xhr.responseText);
             }
-        };
-        xhr.open("GET", "http://radiofrance-podcast.net/podcast09/rss_15644.xml", true);
-        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        });
         xhr.send(null);
     }
-
+/*
     function readData(sData) {
-      console.log("oui");
-      /*
+
         var nodes = oData.getElementsByTagName("soft");
         var ol = document.createElement("ol"),
             li, cn;
@@ -70,30 +47,9 @@ window.addEventListener("load", function() {
             ol.appendChild(li);
         }
         document.getElementById("podcastList").appendChild(ol);
-        */
+
         alert(sData);
     }
-
-
-    function getXMLHttpRequest() {
-        var xhr = null;
-
-        if (window.XMLHttpRequest || window.ActiveXObject) {
-            if (window.ActiveXObject) {
-                try {
-                    xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e) {
-                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-            } else {
-                xhr = new XMLHttpRequest();
-            }
-        } else {
-            alert("Get yourself a good browser");
-            return null;
-        }
-
-        return xhr;
-    }
+    */
 
 });
