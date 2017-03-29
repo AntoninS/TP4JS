@@ -3,7 +3,6 @@ window.addEventListener("load", function() {
     var sound = document.createElement("audio");
     sound.id = "audio-player";
     sound.controls = "controls";
-    sound.src = "test.mp3";
     sound.type = "audio/mpeg";
 
     var buttonLoadRSS = document.createElement("button");
@@ -35,22 +34,36 @@ window.addEventListener("load", function() {
         var doc = rss.responseXML;
 
         var nodes = doc.getElementsByTagName("item");
-        console.log(nodes.length);
 
         for (var i = 0, c = nodes.length; i < c; i++) {
-          var tr = document.createElement("tr");
-          var title = nodes[i].getElementsByTagName("title")[0].innerHTML;
-          var descr = nodes[i].getElementsByTagName("description")[0].innerHTML;
-          var podcastTable = document.getElementById('playlist-table');
-          var tdTitle = document.createElement("td");
-          tdTitle.innerHTML = title;
-          var tdDescription = document.createElement("td");
-          tdDescription.innerHTML = descr;
+            var tr = document.createElement("tr");
+            var title = nodes[i].getElementsByTagName("title")[0].innerHTML;
+            var descr = nodes[i].getElementsByTagName("description")[0].innerHTML;
+            var podcastTable = document.getElementById('playlist-table');
+            var tdTitle = document.createElement("td");
+            tdTitle.innerHTML = title;
+            var tdDescription = document.createElement("td");
+            tdDescription.innerHTML = descr;
 
-          podcastTable.appendChild(tr);
-          tr.appendChild(tdTitle);
-          tr.appendChild(tdDescription);
+            var tdLoad = document.createElement("td");
+            var btn = document.createElement("button");
+            btn.id = "btn" + i;
+            btn.value = nodes[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+            btn.innerHTML = "Load";
+            btn.addEventListener("click", loadAudioFromRSS);
+
+            podcastTable.appendChild(tr);
+            tr.appendChild(tdTitle);
+            tr.appendChild(tdDescription);
+            tr.appendChild(tdLoad);
+            tr.appendChild(btn);
         }
+    }
+
+    function loadAudioFromRSS(){
+      console.log(this.value);
+      sound.src = this.value;
+
     }
     /*
         function readData(sData) {
