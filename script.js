@@ -20,7 +20,8 @@ window.addEventListener("load", function() {
 
     function request() {
         var xhr = new XMLHttpRequest();
-        var url = "https://crossorigin.me/http://radiofrance-podcast.net/podcast09/rss_15644.xml"; //+ document.getElementById("inputRSS");
+        var proxy = "https://crossorigin.me/"; //+ document.getElementById("inputRSS");
+        var url = proxy.concat(document.getElementById("inputRSS").value);
         console.log(url);
 
         xhr.open("GET", url, true);
