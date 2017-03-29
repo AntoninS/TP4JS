@@ -64,7 +64,6 @@ window.addEventListener("load", function() {
     function loadAudioFromRSS() {
         console.log("URL of the mp3 : " + this.value);
         sound.src = this.value;
-
     }
 
 });
