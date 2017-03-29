@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
     elementInputRSS.appendChild(inputRSS);
     elementInputRSS.appendChild(buttonLoadRSS);
 
-    function getRSS() { // It could be nice to use a callback function, but it's bugging when I try to use it whith an event listener
+    function getRSS() { // It could be nice to use a callback function, but it bug when I try to use it whith an event listener
         var xhr = new XMLHttpRequest();
         var proxy = "https://crossorigin.me/"; // We need to use a proxy to fix the CORS problem
         var url = proxy.concat(document.getElementById("inputRSS").value); //We add our proxy just before the RSS url
@@ -61,27 +61,10 @@ window.addEventListener("load", function() {
         }
     }
 
-    function loadAudioFromRSS(){
-      console.log("URL of the mp3 : " + this.value);
-      sound.src = this.value;
+    function loadAudioFromRSS() {
+        console.log("URL of the mp3 : " + this.value);
+        sound.src = this.value;
 
     }
-    /*
-        function readData(sData) {
-
-            var nodes = oData.getElementsByTagName("soft");
-            var ol = document.createElement("ol"),
-                li, cn;
-            for (var i = 0, c = nodes.length; i < c; i++) {
-                li = document.createElement("li");
-                cn = document.createTextNode(nodes[i].getAttribute("name"));
-                li.appendChild(cn);
-                ol.appendChild(li);
-            }
-            document.getElementById("podcastList").appendChild(ol);
-
-            alert(sData);
-        }
-        */
 
 });
