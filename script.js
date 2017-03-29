@@ -1,5 +1,6 @@
 window.addEventListener("load", function() {
-    var elementPlayer = document.getElementById("player");
+    var elementPlayer = document.getElementById("divPlayer");
+    var elementInputRSS = document.getElementById("divInputRSS");
     var sound = document.createElement("audio");
     sound.id = "audio-player";
     sound.controls = "controls";
@@ -12,15 +13,15 @@ window.addEventListener("load", function() {
     var inputRSS = document.createElement("input");
     inputRSS.id = "inputRSS";
     inputRSS.value = "http://radiofrance-podcast.net/podcast09/rss_15644.xml" //With that we don't have to enter our url everytime
-    elementPlayer.appendChild(buttonLoadRSS);
-    elementPlayer.appendChild(inputRSS);
     elementPlayer.appendChild(sound);
+    elementInputRSS.appendChild(inputRSS);
+    elementInputRSS.appendChild(buttonLoadRSS);
 
     function getRSS() { // It could be nice to use a callback function, but it's bugging when I try to use it whith an event listener
         var xhr = new XMLHttpRequest();
         var proxy = "https://crossorigin.me/"; // We need to use a proxy to fix the CORS problem
         var url = proxy.concat(document.getElementById("inputRSS").value); //We add our proxy just before the RSS url
-
+        console.log("URL typed in the text input : " + url);
         xhr.open("GET", url, true);
         xhr.addEventListener('readystatechange', function() {
             if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status === 0)) {
@@ -56,12 +57,12 @@ window.addEventListener("load", function() {
             tr.appendChild(tdTitle);
             tr.appendChild(tdDescription);
             tr.appendChild(tdLoad);
-            tr.appendChild(btn);
+            tdLoad.appendChild(btn);
         }
     }
 
     function loadAudioFromRSS(){
-      console.log(this.value);
+      console.log("URL of the mp3 : " + this.value);
       sound.src = this.value;
 
     }

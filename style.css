@@ -1,4 +1,18 @@
+body{
+  font-family: calibri;
+}
+
 table{
   margin: auto;
   width: 900px;
+  border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+#divPlayer, #divInputRSS{
+  text-align: center;
+  margin: 20px;
 }
