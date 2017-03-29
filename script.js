@@ -10,7 +10,7 @@ window.addEventListener("load", function() {
     var buttonLoadRSS = document.createElement("button");
 
     buttonLoadRSS.innerHTML = "Load RSS feed";
-    buttonLoadRSS.addEventListener("click", getRSS);
+    buttonLoadRSS.addEventListener("click", sendData)
 
 
     var inputRSS = document.createElement("input");
@@ -18,7 +18,29 @@ window.addEventListener("load", function() {
     elementPlayer.appendChild(inputRSS);
     elementPlayer.appendChild(sound);
 
+    function getXDomainRequest() {
+            var xdr = null;
+            if (window.XDomainRequest) {
+                    xdr = new XDomainRequest();
+            } else if (window.XMLHttpRequest) {
+                    xdr = new XMLHttpRequest();
+            } else {
+                    alert("Votre navigateur ne gère pas l'AJAX cross-domain !");
+            }
+            return xdr;
+    }
 
+    function sendData() {
+            var xdr = getXDomainRequest();
+            xdr.onload = function() {
+                    alert(xdr.responseText);
+            }
+            xdr.open("GET", "http://radiofrance-podcast.net/podcast09/rss_15644.xml");
+            xdr.send();
+            console.log(xdr.responseXML);
+
+    }
+/*
 
     getRSS();
 
@@ -61,4 +83,6 @@ window.addEventListener("load", function() {
         sound.src = "test.mp3";
 
     }
+
+    */
 });
